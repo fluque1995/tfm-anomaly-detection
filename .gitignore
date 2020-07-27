@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Data folders
+dataset/
+predictions/
+processed_c3d_features/
+raw_c3d_features/
