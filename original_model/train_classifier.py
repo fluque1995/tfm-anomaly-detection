@@ -5,9 +5,11 @@ from keras.optimizers import Adagrad
 from scipy.io import savemat
 from keras.models import model_from_json
 import os
+
 from os import listdir
 import numpy as np
 import keras.backend as K
+import classifier
 
 from datetime import datetime
 
@@ -101,7 +103,7 @@ def custom_objective(y_true, y_pred):
         z_scores_list.append(K.sum(max_z))
 
     z_scores = K.stack(z_scores_list)
-    z = K.sum(z_scores)
+    z = K.mean(z_scores)
 
     return z + 0.00008*K.sum(temporal_constrains) + 0.00008*K.sum(sparsity_constrains)
 
@@ -119,12 +121,7 @@ weights_path = output_dir + 'weights.mat'
 model_path = output_dir + 'model.json'
 
 #Create Full connected Model
-model = Sequential()
-model.add(Dense(512, input_dim=4096,kernel_initializer='glorot_normal',kernel_regularizer=l2(0.001),activation='relu'))
-model.add(Dropout(0.6))
-model.add(Dense(32,kernel_initializer='glorot_normal',kernel_regularizer=l2(0.001)))
-model.add(Dropout(0.6))
-model.add(Dense(1,kernel_initializer='glorot_normal',kernel_regularizer=l2(0.001),activation='sigmoid'))
+model = classifier.classifier_model()
 
 adagrad=Adagrad(lr=0.001, epsilon=1e-08)
 model.compile(loss=custom_objective, optimizer=adagrad)
