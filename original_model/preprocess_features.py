@@ -5,9 +5,12 @@ import configuration as cfg
 
 def transform_into_segments(features, n_segments=32):
     if features.shape[0] < n_segments:
-        raise RuntimeError("Number of prev segments lesser than expected output size")
+        raise RuntimeError(
+            "Number of prev segments lesser than expected output size"
+        )
 
-    cuts = np.linspace(0, features.shape[0], n_segments, dtype=int, endpoint=False)
+    cuts = np.linspace(0, features.shape[0], n_segments,
+                       dtype=int, endpoint=False)
 
     new_feats = []
     for i, j in zip(cuts[:-1], cuts[1:]):
