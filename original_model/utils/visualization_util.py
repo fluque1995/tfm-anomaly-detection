@@ -61,7 +61,3 @@ def visualize_predictions(video_path, predictions, save_path):
         anim.save(save_path, dpi=200, writer='imagemagick')
     else:
         plt.show()
-
-    return
-
-
