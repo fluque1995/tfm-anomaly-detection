@@ -2,6 +2,16 @@ import numpy as np
 
 
 def sliding_window(arr, size, stride):
+    """Apply sliding window to an array, getting chunks of
+    of specified size using the specified stride
+
+    :param arr: Array to be divided
+    :param size: Size of the chunks
+    :param stride: Number of frames to skip for the next chunk
+    :returns: Tensor with the resulting chunks
+    :rtype: np.ndarray
+
+    """
     num_chunks = int((len(arr) - size) / stride) + 2
     result = []
     for i in range(0,  num_chunks * stride, stride):
@@ -10,19 +20,23 @@ def sliding_window(arr, size, stride):
     return np.array(result)
 
 
-def chunks(l, n):
-    for i in range(0, len(l), n):
-        yield l[i:i + n]
-
-
 def interpolate(features, features_per_bag):
+    """Transform a bag with an arbitrary number of features into a bag
+    with a fixed amount, using interpolation of consecutive features
+
+    :param features: Bag of features to pad
+    :param features_per_bag: Number of features to obtain
+    :returns: Interpolated features
+    :rtype: np.ndarray
+
+    """
     feature_size = np.array(features).shape[1]
     interpolated_features = np.zeros((features_per_bag, feature_size))
-    interpolation_indicies = np.round(np.linspace(0, len(features) - 1, num=features_per_bag + 1))
+    interpolation_indices = np.round(np.linspace(0, len(features) - 1, num=features_per_bag + 1))
     count = 0
-    for index in range(0, len(interpolation_indicies)-1):
-        start = int(interpolation_indicies[index])
-        end = int(interpolation_indicies[index + 1])
+    for index in range(0, len(interpolation_indices)-1):
+        start = int(interpolation_indices[index])
+        end = int(interpolation_indices[index + 1])
 
         assert end >= start
 
@@ -43,23 +57,17 @@ def interpolate(features, features_per_bag):
 
 
 def extrapolate(outputs, num_frames):
+    """Expand output to match the video length
+
+    :param outputs: Array of predicted outputs
+    :param num_frames: Expected size of the output array
+    :returns: Array of output size
+    :rtype: np.ndarray
+
+    """
+
     extrapolated_outputs = []
-    extrapolation_indicies = np.round(np.linspace(0, len(outputs) - 1, num=num_frames))
-    for index in extrapolation_indicies:
+    extrapolation_indices = np.round(np.linspace(0, len(outputs) - 1, num=num_frames))
+    for index in extrapolation_indices:
         extrapolated_outputs.append(outputs[int(index)])
     return np.array(extrapolated_outputs)
-
-
-def test_interpolate():
-    test_case1 = np.random.randn(24, 2048)
-    output_case1 = interpolate(test_case1, 32)
-    assert output_case1.shape == (32, 2048)
-
-    test_case2 = np.random.randn(32, 2048)
-    output_case2 = interpolate(test_case2, 32)
-    assert output_case2.shape == (32, 2048)
-
-    test_case3 = np.random.randn(42, 2048)
-    output_case3 = interpolate(test_case3, 32)
-    assert output_case3.shape == (32, 2048)
-

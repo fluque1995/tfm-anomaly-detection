@@ -7,8 +7,9 @@ import utils.video_util
 import utils.array_util
 import matplotlib.pyplot as plt
 
-ground_truth = pd.read_csv(cfg.test_temporal_annotations, header=None, index_col=0)
-print(ground_truth)
+ground_truth = pd.read_csv(
+    cfg.test_temporal_annotations, header=None, index_col=0
+)
 
 preds = []
 gts = []

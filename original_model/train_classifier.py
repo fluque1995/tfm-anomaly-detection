@@ -1,12 +1,8 @@
-from keras.models import Sequential
-from keras.layers import Dense, Dropout
-from keras.regularizers import l2
-from keras.optimizers import Adagrad
-from scipy.io import savemat
+import keras.optimizers
+import scipy.io
 from keras.models import model_from_json
 import os
 
-from os import listdir
 import numpy as np
 import keras.backend as K
 import classifier
@@ -24,14 +20,14 @@ def save_model(model, json_path, weight_path):
         my_list[:] = weights
         dict[str(i)] = my_list
         i += 1
-    savemat(weight_path, dict)
+    scipy.io.savemat(weight_path, dict)
 
-def load_model(json_path): 
+def load_model(json_path):
     model = model_from_json(open(json_path).read())
     return model
 
 def load_batch_train(normal_path, normal_list, abnormal_path, abnormal_list):
-  
+
     batchsize=60
     n_exp = int(batchsize/2)
 
@@ -42,7 +38,7 @@ def load_batch_train(normal_path, normal_list, abnormal_path, abnormal_list):
     abnor_list = abnor_list_idx[:n_exp]
     norm_list_idx = np.random.permutation(num_normal)
     norm_list = norm_list_idx[:n_exp]
-    
+
     abnormal_feats = []
     for video_idx in abnor_list:
         video_path = os.path.join(abnormal_path, abnormal_list[video_idx])
@@ -80,7 +76,7 @@ def custom_objective(y_true, y_pred):
     sparsity_constrains_list = []
 
     for i in range(0, n_exp, 1):
-        
+
         video_predictions = y_pred[i*n_seg:(i+1)*n_seg]
 
         max_scores_list.append(K.max(video_predictions))
@@ -90,7 +86,7 @@ def custom_objective(y_true, y_pred):
         sparsity_constrains_list.append(K.sum(video_predictions))
 
     for j in range(n_exp, 2*n_exp, 1):
-        
+
         video_predictions = y_pred[j*n_seg:(j+1)*n_seg]
         max_scores_list.append(K.max(video_predictions))
 
@@ -105,7 +101,9 @@ def custom_objective(y_true, y_pred):
     z_scores = K.stack(z_scores_list)
     z = K.mean(z_scores)
 
-    return z + 0.00008*K.sum(temporal_constrains) + 0.00008*K.sum(sparsity_constrains)
+    return z + \
+        0.00008*K.sum(temporal_constrains) + \
+        0.00008*K.sum(sparsity_constrains)
 
 output_dir = "trained_models/"
 normal_dir = "../processed_c3d_features/train/normal"
@@ -123,7 +121,7 @@ model_path = output_dir + 'model.json'
 #Create Full connected Model
 model = classifier.classifier_model()
 
-adagrad=Adagrad(lr=0.001, epsilon=1e-08)
+adagrad = keras.optimizers.Adagrad(lr=0.001, epsilon=1e-08)
 model.compile(loss=custom_objective, optimizer=adagrad)
 
 if not os.path.exists(output_dir):
@@ -144,9 +142,9 @@ for it_num in range(num_iters):
     loss_graph = np.hstack((loss_graph, batch_loss))
     total_iterations += 1
     if total_iterations % 20 == 0:
-        print ("Iteration=" + str(total_iterations) + " took: " + str(datetime.now() - time_before) + ", with loss of " + str(batch_loss))
-        if total_iterations % 1000 == 0:
-            save_model(model, model_path, output_dir + "weights_{}.mat".format(total_iterations))
+        print ("Iteration={} took: {}, loss: {}".format(
+            total_iterations, datetime.now() - time_before, batch_loss)
+        )
 
 print("Train Successful - Model saved")
 save_model(model, model_path, weights_path)

@@ -10,7 +10,18 @@ from keras.utils.data_utils import get_file
 
 C3D_MEAN_PATH = 'https://github.com/adamcasson/c3d/releases/download/v0.1/c3d_mean.npy'
 
+
 def preprocess_input(video):
+    """Preprocess video input to make it suitable for feature extraction.
+
+    The video is resized, cropped, resampled and training mean is substracted
+    to make it suitable for the network
+
+    :param video: Video to be processed
+    :returns: Preprocessed video
+    :rtype: np.ndarray
+
+    """
 
     intervals = np.ceil(np.linspace(0, video.shape[0] - 1, 16)).astype(int)
     frames = video[intervals]
@@ -37,37 +48,71 @@ def preprocess_input(video):
 
 
 def C3D(weights='sports1M'):
-    
+    """Creation of the full C3D architecture
+
+    :param weights: Weights to be loaded into the network. If None,
+    the network is randomly initialized.
+    :returns: Network model
+    :rtype: keras.model
+
+    """
+
     if weights not in {'sports1M', None}:
         raise ValueError('weights should be either be sports1M or None')
-    
+
     if K.image_data_format() == 'channels_last':
-        shape = (16, 112, 112,3)
+        shape = (16, 112, 112, 3)
     else:
         shape = (3, 16, 112, 112)
-        
+
     model = Sequential()
-    model.add(Conv3D(64, 3, activation='relu', padding='same', name='conv1', input_shape=shape))
-    model.add(MaxPooling3D(pool_size=(1,2,2), strides=(1,2,2), padding='same', name='pool1'))
-    
+    model.add(
+        Conv3D(64,
+               3,
+               activation='relu',
+               padding='same',
+               name='conv1',
+               input_shape=shape))
+    model.add(
+        MaxPooling3D(pool_size=(1, 2, 2),
+                     strides=(1, 2, 2),
+                     padding='same',
+                     name='pool1'))
+
     model.add(Conv3D(128, 3, activation='relu', padding='same', name='conv2'))
-    model.add(MaxPooling3D(pool_size=(2,2,2), strides=(2,2,2), padding='valid', name='pool2'))
-    
+    model.add(
+        MaxPooling3D(pool_size=(2, 2, 2),
+                     strides=(2, 2, 2),
+                     padding='valid',
+                     name='pool2'))
+
     model.add(Conv3D(256, 3, activation='relu', padding='same', name='conv3a'))
     model.add(Conv3D(256, 3, activation='relu', padding='same', name='conv3b'))
-    model.add(MaxPooling3D(pool_size=(2,2,2), strides=(2,2,2), padding='valid', name='pool3'))
-    
+    model.add(
+        MaxPooling3D(pool_size=(2, 2, 2),
+                     strides=(2, 2, 2),
+                     padding='valid',
+                     name='pool3'))
+
     model.add(Conv3D(512, 3, activation='relu', padding='same', name='conv4a'))
     model.add(Conv3D(512, 3, activation='relu', padding='same', name='conv4b'))
-    model.add(MaxPooling3D(pool_size=(2,2,2), strides=(2,2,2), padding='valid', name='pool4'))
-    
+    model.add(
+        MaxPooling3D(pool_size=(2, 2, 2),
+                     strides=(2, 2, 2),
+                     padding='valid',
+                     name='pool4'))
+
     model.add(Conv3D(512, 3, activation='relu', padding='same', name='conv5a'))
     model.add(Conv3D(512, 3, activation='relu', padding='same', name='conv5b'))
-    model.add(ZeroPadding3D(padding=(0,1,1)))
-    model.add(MaxPooling3D(pool_size=(2,2,2), strides=(2,2,2), padding='valid', name='pool5'))
-    
+    model.add(ZeroPadding3D(padding=(0, 1, 1)))
+    model.add(
+        MaxPooling3D(pool_size=(2, 2, 2),
+                     strides=(2, 2, 2),
+                     padding='valid',
+                     name='pool5'))
+
     model.add(Flatten())
-    
+
     model.add(Dense(4096, activation='relu', name='fc6'))
     model.add(Dropout(0.5))
     model.add(Dense(4096, activation='relu', name='fc7'))
@@ -76,12 +121,21 @@ def C3D(weights='sports1M'):
 
     if weights == 'sports1M':
         model.load_weights(cfg.c3d_model_weights)
-    
+
     return model
 
 
 def c3d_feature_extractor():
+    """Creation of the feature extraction architecture. This network is
+    formed by a subset of the original C3D architecture (from the
+    beginning to fc6 layer)
+
+    :returns: Feature extraction model
+    :rtype: keras.model
+
+    """
     model = C3D()
     layer_name = 'fc6'
-    feature_extractor_model = Model(inputs=model.input, outputs=model.get_layer(layer_name).output)
+    feature_extractor_model = Model(inputs=model.input,
+                                    outputs=model.get_layer(layer_name).output)
     return feature_extractor_model

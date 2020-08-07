@@ -14,8 +14,10 @@ print("Processing normal videos...")
 for vid_name in normal_videos:
     print("Processing {}".format(vid_name))
     vid_path = os.path.join(cfg.normal_videos_path, vid_name)
-    feats_path = os.path.join(cfg.raw_normal_train_features, vid_name[:-9] + ".npy")
-    
+    feats_path = os.path.join(
+        cfg.raw_normal_train_features, vid_name[:-9] + ".npy"
+    )
+
     clips, frames = video_util.get_video_clips(vid_path)
 
     # Remove last clip if number of frames is not equal to 16
@@ -37,8 +39,10 @@ print("Processing abnormal videos...")
 for vid_name in abnormal_videos:
     print("Processing {}".format(vid_name))
     vid_path = os.path.join(cfg.abnormal_videos_path, vid_name)
-    feats_path = os.path.join(cfg.raw_abnormal_train_features, vid_name[:-9] + ".npy")
-    
+    feats_path = os.path.join(
+        cfg.raw_abnormal_train_features, vid_name[:-9] + ".npy"
+    )
+
     clips, frames = video_util.get_video_clips(vid_path)
 
     # Remove last clip if number of frames is not equal to 16
@@ -62,7 +66,7 @@ for vid_name in test_videos:
     print("Processing {}".format(vid_name))
     vid_path = os.path.join(cfg.test_set, vid_name)
     feats_path = os.path.join(cfg.raw_test_features, vid_name[:-9] + ".npy")
-    
+
     clips, frames = video_util.get_video_clips(vid_path)
 
     # Remove last clip if number of frames is not equal to 16
