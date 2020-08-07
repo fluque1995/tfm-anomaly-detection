@@ -133,6 +133,12 @@ dataset/
 predictions/
 processed_c3d_features/
 raw_c3d_features/
+processed_lstm_features/
+raw_lstm_features/
+raw_lstm_features_old/
+predictions_lstm/
+img_features/
+ucf101/
 
 # Trained models folders
 original_model/trained_models/
