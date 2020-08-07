@@ -7,11 +7,8 @@ import sklearn.preprocessing
 from utils import video_util
 
 feature_extractor = c3d.c3d_feature_extractor()
-#normal_videos = os.listdir(cfg.normal_videos_path)
-#normal_videos.sort()
-
-with open("remaining.txt", "r") as f:
-    normal_videos = f.read().splitlines()
+normal_videos = os.listdir(cfg.normal_videos_path)
+normal_videos.sort()
 
 print("Processing normal videos...")
 for vid_name in normal_videos:
