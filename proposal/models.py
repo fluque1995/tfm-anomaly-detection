@@ -33,11 +33,13 @@ def recurrent_feats_model():
     td_layer = keras.layers.TimeDistributed(extractor)(input_layer)
     
     recurrent_layer = keras.layers.LSTM(
-        512,
+        1024,
         return_sequences=False,
-        dropout=0.5
+        dropout=0.6
     )(td_layer)
-    linear = keras.layers.Dense(256, activation='relu')(recurrent_layer)
+    linear = keras.layers.Dense(512, activation='relu')(recurrent_layer)
+    linear = keras.layers.Dropout(0.5)(linear)
+    linear = keras.layers.Dense(128, activation='relu')(linear)
     linear = keras.layers.Dropout(0.5)(linear)
     predictions = keras.layers.Dense(101, activation='softmax')(linear)
 
