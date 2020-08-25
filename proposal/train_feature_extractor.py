@@ -20,6 +20,9 @@ model.fit_generator(videogen_train, epochs = 500, validation_data=videogen_test,
                             save_best_only=True,
                             monitor="val_categorical_accuracy",
                             period=20
+                        ),
+                        keras.callbacks.CSVLogger(
+                            filename="train_history.csv"
                         )
                     ])
 
