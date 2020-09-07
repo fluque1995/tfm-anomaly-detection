@@ -1,6 +1,7 @@
 import os
 
-c3d_model_weights = './trained_models/c3d_sports1m.h5'
+extractor_model_weights = "./trained_models/rec_feats_weights.h5"
+
 classifier_model_weigts = './trained_models/weights_proposal.mat'
 classifier_model_json = './trained_models/model_proposal.json'
 
