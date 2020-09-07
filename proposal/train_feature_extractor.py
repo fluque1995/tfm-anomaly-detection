@@ -1,6 +1,7 @@
 import keras
 import video_data_generator
 import models
+import configuration as cfg
 
 videogen_train = video_data_generator.VideoFrameGenerator("../ucf101/train", batch_size=16)
 videogen_test = video_data_generator.VideoFrameGenerator("../ucf101/test", batch_size=16)
@@ -26,4 +27,4 @@ model.fit_generator(videogen_train, epochs = 500, validation_data=videogen_test,
                         )
                     ])
 
-model.save("trained_models/rec_feats_weights.h5")
+model.save(cfg.extractor_model_weights)
