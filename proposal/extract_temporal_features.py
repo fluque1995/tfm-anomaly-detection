@@ -6,12 +6,13 @@ import configuration as cfg
 import numpy as np
 import sklearn.preprocessing
 
-original_model = keras.models.load_model("trained_models/rec_feats_weights.200.h5")
+original_model = keras.models.load_model(cfg.extractor_model_weights)
 spatiotemporal_extractor = keras.models.Model(
     inputs = original_model.input,
     outputs = original_model.get_layer("lstm_1").output
 )
 
+'''
 normal_videos = os.listdir(cfg.normal_videos_path)
 normal_videos.sort()
 for i, vid_name in enumerate(normal_videos):
@@ -34,6 +35,7 @@ for i, vid_name in enumerate(normal_videos):
 
     with open(feats_path, "wb") as f:
         np.save(f, features)
+'''
 
 abnormal_videos = os.listdir(cfg.abnormal_videos_path)
 abnormal_videos.sort()

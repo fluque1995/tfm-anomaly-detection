@@ -5,6 +5,7 @@ from keras.optimizers import Adagrad, Adam
 from scipy.io import savemat
 from keras.models import model_from_json
 import os
+import configuration as cfg
 
 from os import listdir
 import numpy as np
@@ -110,8 +111,8 @@ def custom_objective(y_true, y_pred):
         0.00004*K.sum(sparsity_constrains)
 
 output_dir = "trained_models/"
-normal_dir = "../processed_lstm_features/train/normal"
-abnormal_dir = "../processed_lstm_features/train/abnormal"
+normal_dir = cfg.processed_normal_train_features
+abnormal_dir = cfg.processed_abnormal_train_features
 
 normal_list = os.listdir(normal_dir)
 normal_list.sort()
