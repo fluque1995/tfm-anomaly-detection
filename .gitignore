@@ -142,3 +142,4 @@ ucf101/
 
 # Trained models folders
 original_model/trained_models/
+proposal/trained_models/
