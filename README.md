@@ -77,7 +77,7 @@ names. Also, datasets must be downloaded. In particular:
 - UCF-101 Dataset (https://www.crcv.ucf.edu/data/UCF101.php) is used
   to pretrain our feature extractor proposal. You can download the
   dataset with the proper folder structure for our experiments from
-  https://drive.google.com/file/d/1R2E9WjQS8c48S2z7mNTT8Gc1H1z2mnqP/view?usp=sharing
+  [here](https://drive.google.com/file/d/1R2E9WjQS8c48S2z7mNTT8Gc1H1z2mnqP/view?usp=sharing)
   and place it into the root project folder
 - UCF-Crime Dataset (https://www.crcv.ucf.edu/projects/real-world/) is
   used for evaluation. We provide a curated version of the dataset
@@ -87,6 +87,11 @@ names. Also, datasets must be downloaded. In particular:
   - TEST
   - TRAIN/NORMAL
   - TRAIN/ABNORMAL
+
+**WARNING**: Datasets are heavy, and models are resource-consuming.
+We strongly recommend using dedicated GPUs and computing nodes to
+replicate the experiments, since usual PCs are not capable of handling
+such volumes of data.
 
 ### Pretrained models
 
@@ -103,6 +108,10 @@ We provide several pretrained models used in our experiments:
 - Models from our proposal: These models represent our proposed
   extractor based on a spatio-temporal network and the classifier
   model trained by us. These models can be downloaded from
-  [here](https://drive.google.com/file/d/1XJ8DLRSHowEA3JB2xAUQGOzTo1y0ofQj/view?usp=sharing)
+  [here](https://drive.google.com/file/d/1XJ8DLRSHowEA3JB2xAUQGOzTo1y0ofQj/view?usp=sharing).
   The uncompressed folder must be placed in `proposal/trained_models`
   folder
+
+### Code structure
+
+Developed code is
