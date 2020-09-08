@@ -137,7 +137,6 @@ processed_lstm_features/
 raw_lstm_features/
 raw_lstm_features_old/
 predictions_lstm/
-img_features/
 ucf101/
 
 # Trained models folders
