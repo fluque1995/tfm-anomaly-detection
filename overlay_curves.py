@@ -17,47 +17,27 @@ def calculate_information_for_curves(gts, preds):
 
 ground_truth = pd.read_csv("./dataset/test/temporal-annotation.txt", header=None, index_col=0)
 
-preds_original = []
-preds_replica = []
-
-preds_1024 = []
-preds_768 = []
-preds_512 = []
-
+preds_c3d = []
+preds_lstm = []
 gts = []
 
 for idx, row in ground_truth.iterrows():
-    original_preds_file_path = os.path.join("predictions_original", idx)
-    replica_preds_file_path = os.path.join("predictions_replica", idx)
-    lstm_1024_preds_file_path = os.path.join("predictions_1024", idx)
-    lstm_768_preds_file_path = os.path.join("predictions_768", idx)
-    lstm_512_preds_file_path = os.path.join("predictions_512", idx)
+    c3d_preds_file_path = os.path.join("predictions_c3d", idx)
+    lstm_preds_file_path = os.path.join("predictions_lstm", idx)
     frames = row[6]
 
     try:
-        with open(original_preds_file_path, "rb") as f:
-            curr_original_preds = np.load(f)
-        with open(replica_preds_file_path, "rb") as f:
-            curr_replica_preds = np.load(f)
-        with open(lstm_1024_preds_file_path, "rb") as f:
-            curr_lstm_1024_preds = np.load(f)
-        with open(lstm_768_preds_file_path, "rb") as f:
-            curr_lstm_768_preds = np.load(f)
-        with open(lstm_512_preds_file_path, "rb") as f:
-            curr_lstm_512_preds = np.load(f)
+        with open(c3d_preds_file_path, "rb") as f:
+            curr_c3d_preds = np.load(f)
+        with open(lstm_preds_file_path, "rb") as f:
+            curr_lstm_preds = np.load(f)
 
-        original_padded_preds = array_util.extrapolate(curr_original_preds, frames)
-        replica_padded_preds = array_util.extrapolate(curr_replica_preds, frames)
-        lstm_1024_padded_preds = array_util.extrapolate(curr_lstm_1024_preds, frames)
-        lstm_768_padded_preds = array_util.extrapolate(curr_lstm_768_preds, frames)
-        lstm_512_padded_preds = array_util.extrapolate(curr_lstm_512_preds, frames)
+        c3d_padded_preds = array_util.extrapolate(curr_c3d_preds, frames)
+        lstm_padded_preds = array_util.extrapolate(curr_lstm_preds, frames)
 
     except FileNotFoundError:
-        original_padded_preds = np.zeros((frames,1))
-        replica_padded_preds = np.zeros((frames,1))
-        lstm_1024_padded_preds = np.zeros((frames,1))
-        lstm_768_padded_preds = np.zeros((frames,1))
-        lstm_512_padded_preds = np.zeros((frames,1))
+        c3d_padded_preds = np.zeros((frames,1))
+        lstm_padded_preds = np.zeros((frames,1))
 
         print("No predictions generated for {}".format(idx))
 
@@ -74,52 +54,29 @@ for idx, row in ground_truth.iterrows():
     if anomaly_start_2 != -1 and anomaly_end_2 != -1:
         curr_gts[anomaly_start_2:anomaly_end_2+1] = 1
 
-    preds_original.append(original_padded_preds)
-    preds_replica.append(replica_padded_preds)
-    preds_1024.append(lstm_1024_padded_preds)
-    preds_768.append(lstm_768_padded_preds)
-    preds_512.append(lstm_512_padded_preds)
+    preds_c3d.append(c3d_padded_preds)
+    preds_lstm.append(lstm_padded_preds)
     gts.append(curr_gts)
 
 gts = np.concatenate(gts)
 
-preds_original = np.concatenate(preds_original)
-preds_replica = np.concatenate(preds_replica)
-preds_1024 = np.concatenate(preds_1024)
-preds_768 = np.concatenate(preds_768)
-preds_512 = np.concatenate(preds_512)
+preds_c3d = np.concatenate(preds_c3d)
+preds_lstm = np.concatenate(preds_lstm)
 
 (
-    fpr_original, tpr_original, auc_original,
-    prec_original, rec_original, ap_original
-) = calculate_information_for_curves(gts, preds_original)
+    fpr_c3d, tpr_c3d, auc_c3d,
+    prec_c3d, rec_c3d, ap_c3d
+) = calculate_information_for_curves(gts, preds_c3d)
 
 (
-    fpr_replica, tpr_replica, auc_replica,
-    prec_replica, rec_replica, ap_replica
-) = calculate_information_for_curves(gts, preds_replica)
+    fpr_lstm, tpr_lstm, auc_lstm,
+    prec_lstm, rec_lstm, ap_lstm
+) = calculate_information_for_curves(gts, preds_lstm)
 
-(
-    fpr_1024, tpr_1024, auc_1024,
-    prec_1024, rec_1024, ap_1024
-) = calculate_information_for_curves(gts, preds_1024)
-
-(
-    fpr_768, tpr_768, auc_768,
-    prec_768, rec_768, ap_768
-) = calculate_information_for_curves(gts, preds_768)
-
-(
-    fpr_512, tpr_512, auc_512,
-    prec_512, rec_512, ap_512
-) = calculate_information_for_curves(gts, preds_512)
 
 plt.title("Curva ROC")
-plt.plot(fpr_original, tpr_original, 'b', label = "Original - AUC: {:.5f}".format(auc_original))
-plt.plot(fpr_replica, tpr_replica, 'g', label = "Replica - AUC: {:.5f}".format(auc_replica))
-plt.plot(fpr_1024, tpr_1024, 'r', label = "LSTM 1024 - AUC: {:.5f}".format(auc_1024))
-plt.plot(fpr_768, tpr_768, 'm', label = "LSTM 768 - AUC: {:.5f}".format(auc_768))
-plt.plot(fpr_512, tpr_512, 'y', label = "LSTM 512 - AUC: {:.5f}".format(auc_512))
+plt.plot(fpr_c3d, tpr_c3d, 'b', label = "C3d - AUC: {:.5f}".format(auc_c3d))
+plt.plot(fpr_lstm, tpr_lstm, 'g', label = "Lstm - AUC: {:.5f}".format(auc_lstm))
 plt.legend(loc = 'lower right')
 plt.plot([0, 1], [0, 1],'k--')
 plt.plot([1, 0], [0, 1],'k:')
@@ -127,20 +84,16 @@ plt.xlim([0, 1])
 plt.ylim([0, 1])
 plt.ylabel('True Positive Rate')
 plt.xlabel('False Positive Rate')
-plt.savefig(os.path.join("/mnt/sdd/pacoluque/output", "roc_overlay.pdf"))
+plt.savefig("roc_overlay.pdf")
 
 plt.clf()
 
 plt.title("Curva PR")
-plt.plot(rec_original, prec_original, 'b', label = "Original - AP: {:.5f}".format(ap_original))
-plt.plot(rec_replica, prec_replica, 'g', label = "Replica - AP: {:.5f}".format(ap_replica))
-plt.plot(rec_1024, prec_1024, 'r', label = "LSTM 1024 - AP: {:.5f}".format(ap_1024))
-plt.plot(rec_768, prec_768, 'm', label = "LSTM 768 - AP: {:.5f}".format(ap_768))
-plt.plot(rec_512, prec_512, 'y', label = "LSTM 512 - AP: {:.5f}".format(ap_512))
-
+plt.plot(rec_c3d, prec_c3d, 'b', label = "C3d - AP: {:.5f}".format(ap_c3d))
+plt.plot(rec_lstm, prec_lstm, 'g', label = "Lstm - AP: {:.5f}".format(ap_lstm))
 plt.legend(loc = 'upper right')
 plt.xlim([0, 1])
 plt.ylim([0, 1])
 plt.ylabel('Precison')
 plt.xlabel('Recall')
-plt.savefig(os.path.join("/mnt/sdd/pacoluque/output", "pr_overlay.pdf"))
+plt.savefig("pr_overlay.pdf")
