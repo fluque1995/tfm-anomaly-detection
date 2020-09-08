@@ -61,8 +61,48 @@ libraries:
 - scikit_learn 0.23.2
 
 A requirements file is provided for `pip` installation. In order to
-install dependencies navigate to the project root folder and execute:
+install dependencies, navigate to the project root folder and execute:
 
 ``` shell
 pip install -r requirements.txt
 ```
+
+### Data folders structure and datasets
+
+In order to properly execute the models, some folders must be created
+in advance. Executing the script `create_data_folders.sh` at root
+project level will create the required folders with their default
+names. Also, datasets must be downloaded. In particular:
+
+- UCF-101 Dataset (https://www.crcv.ucf.edu/data/UCF101.php) is used
+  to pretrain our feature extractor proposal. You can download the
+  dataset with the proper folder structure for our experiments from
+  https://drive.google.com/file/d/1R2E9WjQS8c48S2z7mNTT8Gc1H1z2mnqP/view?usp=sharing
+  and place it into the root project folder
+- UCF-Crime Dataset (https://www.crcv.ucf.edu/projects/real-world/) is
+  used for evaluation. We provide a curated version of the dataset
+  with the proper train-test splits for anomaly detection, as we have
+  used it in our experiments. In order to use the dataset, you should
+  download the following files:
+  - TEST
+  - TRAIN/NORMAL
+  - TRAIN/ABNORMAL
+
+### Pretrained models
+
+We provide several pretrained models used in our experiments:
+
+- Models from the original proposal: These models represent the
+  original feature extractor based on C3D and the two sets of weights
+  for the classifier; the original trained model by the authors
+  (`weights_L1L2.mat`) and the replica trained by us
+  (`weights_own.mat`). These models can be downloaded from
+  [here](https://drive.google.com/file/d/1s3qBXLZzMGAsmG8U0YTJJ4NOOK3KBakl/view?usp=sharing).
+  The uncompressed folder must be placed in
+  `original_model/trained_models` folder
+- Models from our proposal: These models represent our proposed
+  extractor based on a spatio-temporal network and the classifier
+  model trained by us. These models can be downloaded from
+  [here](https://drive.google.com/file/d/1XJ8DLRSHowEA3JB2xAUQGOzTo1y0ofQj/view?usp=sharing)
+  The uncompressed folder must be placed in `proposal/trained_models`
+  folder
