@@ -31,7 +31,7 @@ smaller dataset for video classification.
 ### Baseline implementations
 
 This implementation, specially the original model replica (which
-can be found in `original_model` folder strongly relies in
+can be found in `original_model` folder) strongly relies in
 these previous works:
 
 - https://github.com/WaqasSultani/AnomalyDetectionCVPR2018: Original
@@ -46,3 +46,23 @@ this repo and fully executable in Python. Original proposals rely on
 external resources and MATLAB for some of the executions, while our
 implementation is completely designed in Python, which ease the
 execution.
+
+### Software requirements
+
+The project is completely written in Python 3, using the following
+libraries:
+
+- Keras 2.2.4 (TensorFlow GPU backend)
+- numpy 1.16.2
+- scipy 1.2.0
+- opencv_contrib_python 4.0.0.21
+- pandas 1.0.5
+- matplotlib 3.0.2
+- scikit_learn 0.23.2
+
+A requirements file is provided for `pip` installation. In order to
+install dependencies navigate to the project root folder and execute:
+
+``` shell
+pip install -r requirements.txt
+```
