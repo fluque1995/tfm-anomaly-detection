@@ -114,4 +114,24 @@ We provide several pretrained models used in our experiments:
 
 ### Code structure
 
-Developed code is
+Developed code is placed in two main folders, together with some
+scripts to calculate results:
+
+- `calculate_video_level_scores.py`: It calculates the percentage of
+  normal and abnormal videos in which an alarm has been triggered. For
+  normal videos, a lesser percentage means lesser false alarms, and
+  thus a better model. For abnormal videos, a greater percentage means
+  better capability of detection anomalies.
+- `overlay_curves.py`: This script computes the ROC and PR curves
+  given the predictions of both models, and represents them in two
+  different graphs (one for ROCs and one for PRs).
+- `original_model` folder: The code in this folder is prepared to
+  replicate the original experiments, from feature extraction with C3D
+  to training and evaluation of the anomaly classifier.
+- `proposal` folder: The code in this folder is prepared to replicate
+  our experiments. There are scripts to train the feature extractor
+  over UCF-101, extract features from UCF-Crime dataset using the
+  pretrained extractor, train and evaluate the anomaly classifier.
+
+There is more information on how to reproduce the experiments in the
+README files inside each folder.
