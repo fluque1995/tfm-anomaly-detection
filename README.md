@@ -84,7 +84,8 @@ names. Also, datasets must be downloaded. In particular:
   with the proper train-test splits for anomaly detection, as we have
   used it in our experiments. In order to use the dataset, you should
   download the following files:
-  - TEST
+  - [Test split](https://drive.google.com/file/d/1ynzUmzihaAZkLXJ9jzhppK0eLMskhh1F/view?usp=sharing):
+
   - TRAIN/NORMAL
   - TRAIN/ABNORMAL
 
