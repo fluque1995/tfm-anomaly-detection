@@ -11,7 +11,7 @@ def recurrent_feats_model():
 
     input_layer = keras.layers.Input((None,299,299,3))
     td_layer = keras.layers.TimeDistributed(extractor)(input_layer)
-    
+
     recurrent_layer = keras.layers.LSTM(
         1024,
         return_sequences=False,
