@@ -85,7 +85,8 @@ names. Also, datasets must be downloaded. In particular:
   used it in our experiments. In order to use the dataset, you should
   download the following files:
   - [Test split](https://drive.google.com/file/d/1ynzUmzihaAZkLXJ9jzhppK0eLMskhh1F/view?usp=sharing):
-
+    This file contains the test split, and should be decompressed in
+    the folder `dataset/test`.
   - TRAIN/NORMAL
   - TRAIN/ABNORMAL
 
