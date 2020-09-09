@@ -83,12 +83,21 @@ names. Also, datasets must be downloaded. In particular:
   used for evaluation. We provide a curated version of the dataset
   with the proper train-test splits for anomaly detection, as we have
   used it in our experiments. In order to use the dataset, you should
-  download the following files:
+  download the following files. The main dataset has been split in
+  three parts due to its size:
   - [Test split](https://drive.google.com/file/d/1ynzUmzihaAZkLXJ9jzhppK0eLMskhh1F/view?usp=sharing):
     This file contains the test split, and should be decompressed in
     the folder `dataset/test`.
-  - TRAIN/NORMAL
-  - TRAIN/ABNORMAL
+  - [Train split - normal
+    videos](https://drive.google.com/file/d/1k63Qlfn3aU3_CpXxxAzPJ_hYqeSo38PP/view?usp=sharing):
+    This file contains the normal videos for the train split. The
+    videos contained in this file should be placed inside folder
+    `dataset/train/normal`
+  - [Train split - abnormal
+    videos](https://drive.google.com/file/d/1Zv1CU7PxPDY5WyGc70Kt6SCDFqpjV7gX/view?usp=sharing):
+    This file contains the abnormal videos for the train split. The
+    videos contained in this file should be placed inside folder
+    `dataset/train/abnormal`
 
 **WARNING**: Datasets are heavy, and models are resource-consuming.
 We strongly recommend using dedicated GPUs and computing nodes to
