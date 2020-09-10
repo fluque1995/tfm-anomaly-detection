@@ -7,6 +7,7 @@ from keras.regularizers import l2
 import configuration as cfg
 
 def classifier_model():
+
     model = Sequential()
     model.add(Dense(512, input_dim=1024, kernel_initializer='glorot_normal', kernel_regularizer=l2(0.001), activation='relu'))
     model.add(Dropout(0.5))
