@@ -12,7 +12,6 @@ spatiotemporal_extractor = keras.models.Model(
     outputs = original_model.get_layer("lstm_1").output
 )
 
-'''
 normal_videos = os.listdir(cfg.normal_videos_path)
 normal_videos.sort()
 for i, vid_name in enumerate(normal_videos):
@@ -35,7 +34,6 @@ for i, vid_name in enumerate(normal_videos):
 
     with open(feats_path, "wb") as f:
         np.save(f, features)
-'''
 
 abnormal_videos = os.listdir(cfg.abnormal_videos_path)
 abnormal_videos.sort()

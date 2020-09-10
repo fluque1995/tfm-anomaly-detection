@@ -1,7 +1,7 @@
 import glob
 import numpy as np
 
-models = ["original", "replica", "1024", "768", "512"]
+models = ["c3d", "lstm"]
 
 for model in models:
     normal_predictions_regex = "predictions_{}/Normal*".format(model)
