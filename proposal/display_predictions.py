@@ -15,7 +15,11 @@ def run_demo():
     print("Number of clips in the video : ", len(video_clips))
 
     # build models
-    feature_extractor = c3d_feature_extractor()
+    original_model = keras.models.load_model(cfg.extractor_model_weights)
+    feature_extractor = keras.models.Model(
+        inputs = original_model.input,
+        outputs = original_model.get_layer("lstm_1").output
+    )
     classifier_model = build_classifier_model()
 
     print("Models initialized")
