@@ -1,0 +1,171 @@
+\documentclass[../main.tex]{book}
+
+\begin{document}
+
+\chapter{Introducción}
+
+En las últimas décadas se ha experimentado un crecimiento poblacional
+sin precedentes alrededor de todo el mundo, con el consecuente aumento
+de las aglomeraciones de personas, las cuales llegan a involucrar a
+miles de individuos. Además, las tasas de criminalidad y terrorismo se
+han disparado de forma similar. La combinación de estos hechos ha
+provocado que la videovigilancia masiva se convierta en una
+herramienta prioritaria. El número de cámaras de vigilancia instaladas
+en el mundo, tanto dentro del ámbito público como en el privado, se ha
+multiplicado en los últimos años. El desarrollo tecnológico, además,
+está produciendo una importante mejora en la calidad de los vídeos que
+se recopilan, a cambio de un aumento importante en el volumen de
+información almacenada. Aparece, por tanto, la necesidad de procesar
+una gran cantidad de información en forma de archivos de vídeo.\\
+
+Históricamente, dicho procesamiento se ha realizado de forma manual,
+consumiendo una gran cantidad de recursos humanos. Hoy en día, la
+velocidad a la que se genera dicha información, y el volumen tan
+abismal que se genera diariamente, hace casi imposible la gestión
+manual de esta información de forma exhaustiva y adecuada. Además,
+esta información debe procesarse en tiempo real en la medida de lo
+posible, ya que la respuesta rápida en situaciones de emergencia es
+crucial para reducir los efectos de una posible catástrofe. Esto ha
+hecho que los métodos clásicos de supervisión humana queden
+paulatinamente obsoletos, y aparezca la necesidad de automatizar el
+proceso. En este contexto aparece el concepto de la videovigilancia
+automática.\\
+
+La videovigilancia automática es una rama de investigación cuyo
+objetivo es el análisis de múltiples fuentes de vídeo en tiempo real,
+para la extracción automática de información relevante relacionada con
+el comportamiento de los individuos \cite{ma2009intelligent}. Esta
+área de investigación aúna dos grandes campos de trabajo dentro del
+aprendizaje automático; la visión por computador y el análisis de
+series temporales. Dado que el tipo de dato más común dentro de este
+contexto son las secuencias de vídeo, por un lado se ha de extraer
+información de cada uno de los fotogramas, y por otro información
+temporal derivada de la secuencia de dichos fotogramas.\\
+
+El auge del aprendizaje profundo, además, ha supuesto un avance muy
+importante en el desarrollo de modelos en este contexto. Según
+\cite{zitouni2016advances}, existen cuatro áreas principales en el
+contexto de la videovigilancia automática:
+
+\begin{enumerate}
+\item Detección y seguimiento de individuos
+\item Recuento y estimación de densidad de individuos
+\item Análisis y clasificación de comportamientos
+\item Detección de comportamientos anómalos
+\end{enumerate}
+
+Las tareas 1 y 2 han sido ampliamente estudiadas y los modelos de
+aprendizaje clásico son suficientes para la obtención de resultados de
+calidad. No obstante, en las tareas 3 y 4 los resultados eran muy
+limitados. La aparición de los modelos de aprendizaje profundo y el
+aumento de la capacidad de cálculo ha supuesto un avance importante
+para todas las áreas. En los dos primeros casos, ha permitido que la
+densidad de individuos presentes en la imagen sea más alta antes de
+que se produzca una pérdida de rendimiento, y en los dos últimos casos
+ha provocado una mejoría muy notable, ya que la complejidad de la
+información que estos modelos son capaces de extraer es notablemente
+más alta que la extraída por los modelos clásicos.\\
+
+Esta mejora tan significativa ha provocado que en los últimos años
+aparezcan una gran cantidad de trabajos que resuelven alguno de los
+problemas relacionados con la videovigilancia automática aplicando
+modelos de redes neuronales. No obstante, estos trabajos aparecen
+dispersos, y es difícil establecer una comparativa sobre ellos. Esta
+problemática es especialmente relevante cuando se tratan de
+desarrollar nuevos modelos, ya que es difícil recopilar el
+conocimiento previo sobre la temática. Esta dispersión radica en
+varios factores:\\
+
+\begin{enumerate}
+\item No existe un consenso claro sobre las tareas que deben abordarse
+  dentro de esta área de investigación.
+\item No hay una taxonomía clara para organizar los distintos trabajos
+  previamente desarrollados.
+\item No existe una recopilación de trabajos que afronten esta
+  problemática desde la perspectiva del aprendizaje profundo.
+\end{enumerate}
+
+En particular, nuestra propuesta de trabajo se engloba dentro del
+proyecto de investigación \textit{AI\_MARS-DeepLABD: Artificial
+  Intelligence system for Monitoring, Alert and Response for Security
+  in events. Deep Learning for Abnomal Behavior Detection}, el cual
+pretende diseñar e implementar sistemas de aprendizaje profundo para
+la detección de comportamientos anómalos, y por tanto, enfocaremos el
+trabajo en esa dirección. Esto hace que nos centremos especialmente en
+la última de las tareas. Es la más novedosa de las áreas listadas
+anteriormente, y esto hace que exista una especial incertidumbre
+alrededor de la misma. En particular, resulta muy difícil establecer
+una organización clara para los trabajos que afrontan esta
+problemática, porque el concepto de comportamiento anómalo puede
+incluir definiciones muy diversas. Por ejemplo, podemos considerar
+como anómalo la presencia de una persona en un área restringida, una
+multitud corriendo despavorida, o un pequeño grupo de personas que
+inicia una pelea por la calle. Claramente, la fuente de la anomalía en
+los tres casos es completamente distinta, y difícilmente comparable.
+Esto provoca que la comparativa entre modelos sea compleja. Además, el
+número de conjuntos de datos públicos que permitan establecer
+comparaciones entre los modelos es relativamente escaso, y un gran
+número de trabajos utilizan sus propios conjuntos de datos diseñados
+específicamente para el problema que tratan de resolver.\\
+
+\section{Objetivos del trabajo}
+
+Dado el contexto previo, los objetivos de este trabajo tratan de
+cubrir un estudio profundo del área de la videovigilancia automática,
+en particular centrado en la detección de comportamientos anómalos en
+vídeo. Los objetivos concretos que se han planteado para el trabajo
+son los siguientes:
+
+\begin{enumerate}
+\item Proponer una taxonomía para la organización de los trabajos que
+  afrontan el problema del análisis de multitudes en videovigilancia.
+\item Revisar detalladamente los trabajos propuestos dentro del área
+  de la detección de comportamientos anómalos utilizando aprendizaje
+  profundo.
+\item Estudiar la extracción de características en vídeo utilizando
+  modelos de aprendizaje profundo. En concreto, se estudia un modelo
+  del estado del arte en la detección de anomalías en videovigilancia,
+  y se propone una mejora basada en un extractor de características
+  profundo de mayor potencia.
+\end{enumerate}
+
+El resto del trabajo se estructura de la siguiente manera. En el
+capítulo \ref{sec:state-of-the-art} se expone el estudio teórico del
+trabajo. En él, se propone una taxonomía en etapas que permite agrupar
+los trabajos hasta el momento dentro de cuatro etapas, en las que cada
+una recae en los resultados de las anteriores. Además, se estudian los
+principales conjuntos de datos disponibles públicamente y las métricas
+que se utilizan para evaluar la calidad de los modelos dentro de esta
+área de conocimiento. Finalmente, se resumen los principales trabajos
+que utilizan aprendizaje profundo para resolver el problema de la
+detección de anomalías en multitudes, estableciendo una división de los
+mismos en función de la taxonomía previa.\\
+
+En el capítulo \ref{sec:model-analysis} se llevará a cabo el análisis
+del uso de características espacio-temporales para la detección de
+acciones anómalas. Concretamente, tomaremos el trabajo propuesto en
+\cite{sultani2018real} y trataremos de mejorar sus resultados
+empleando un extractor de características más potente. En dicho
+trabajo, proponen una red neuronal convolucional en tres dimensiones
+como extractor de características en vídeo. A pesar de ser un modelo
+relativamente bueno para capturar características tanto temporales
+como espaciales, creemos que las características temporales se ven
+infrarrepresentadas. Nuestra hipótesis expone que el uso de un
+extractor de características más potente, que combine la capacidad de
+trabajar con imágenes de las redes convolucionales 2D con la capacidad
+de analizar series temporales de las redes recurrentes, obtendrá
+mejores resultados en el problema tratado. En este capítulo se realiza
+un estudio teórico del modelo original y se realiza nuestra propuesta
+de mejora.
+
+A continuación, en el capítulo \ref{sec:experiments-and-results} se
+detalla la experimentación realizada y los resultados
+obtenidos. Finalmente, en \ref{sec:conclusions-future-work} se exponen
+las conclusiones derivadas del estudio y posibles estudios futuros.
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

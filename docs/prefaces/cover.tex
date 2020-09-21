@@ -1,0 +1,50 @@
+\documentclass[../main.tex]{memoir}
+
+\begin{document}
+\begin{titlingpage}
+
+  \newlength{\centeroffset}
+  \setlength{\centeroffset}{-0.5\oddsidemargin}
+  \addtolength{\centeroffset}{0.5\evensidemargin}
+  \thispagestyle{empty}
+
+  \noindent\hspace*{\centeroffset}
+  \begin{minipage}{\textwidth}
+    \vspace{-2cm}
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/logo_ugr.jpg}
+
+    \textsc{ \Large TRABAJO FIN DE MÁSTER\\[0.2cm]}
+    \textsc{ \Degree }\\[0.5cm]
+
+    {\Large\bfseries
+      \ProjectTitle\\
+      \noindent\rule[-1ex]{\textwidth}{1pt}\\[2ex]
+      \ProjectTitleEng\\
+    }
+    \noindent\rule[-1ex]{\textwidth}{3pt}\\[2ex]
+  \end{minipage}
+
+  \vspace{1.5cm}
+  \noindent\hspace*{\centeroffset}\begin{minipage}{\textwidth}
+    \centering
+
+    \textbf{Autor}\\ {\AuthorName}\\[2ex]
+    \textbf{Directores}\\
+    {\MainProf\\
+     \SecondProf}\\[1cm]
+   \includegraphics[height=1.5cm]{images/etsiit_logo.png}\\[1cm]
+   \textsc{\FacultyOne}\\
+    \textsc{---}\\
+    \Location, \Time
+  \end{minipage}
+  % \addtolength{\textwidth}{\centeroffset}
+  % \vspace{\stretch{2}}
+
+\end{titlingpage}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

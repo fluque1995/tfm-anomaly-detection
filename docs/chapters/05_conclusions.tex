@@ -1,0 +1,233 @@
+\documentclass[../main.tex]{memoir}
+
+\begin{document}
+
+\chapter{Conclusiones y trabajo futuro}
+\label{sec:conclusions-future-work}
+
+\section{Conclusiones}
+
+En este trabajo se ha realizado un estudio exhaustivo del uso del
+aprendizaje profundo para el análisis de multitudes en
+videovigilancia. En primer lugar, se ha llevado a cabo un análisis
+detallado del estado del arte, que ha resultado en la publicación de
+un artículo científico en la revista \textit{Information Fusion}, y
+que lleva por título ``Revisiting crowd behaviour analysis through
+deep learning: Taxonomy, anomaly detection, crowd emotions, datasets,
+opportunities and prospects'' \cite{sanchez2020revisiting}. En dicho
+estudio, se ha propuesto una taxonomía que permite organizar los
+nuevos trabajos en una secuencia de pasos, de forma que los resultados
+de cada una de las etapas tienen una fuerte influencia en las etapas
+posteriores. Para la tercera de las etapas de la taxonomía propuesta,
+que corresponde a la fase de extracción de características, se han
+establecido las principales propiedades que se extraen de las
+secuencias de vídeo para el análisis de comportamientos en multitudes.\\
+
+Además, se ha realizado una revisión bibliográfica exhaustiva de los
+modelos basados en aprendizaje profundo para la detección de anomalías
+en multitudes. En primer lugar, se han identificado las distintas
+subtareas que componen esta área, las cuales vienen determinadas por
+las diferentes fuentes que producen la anomalía. Para los tipos de
+anomalía identificados, se han recopilado los principales conjuntos de
+datos públicos y las principales métricas que se utilizan para evaluar
+la calidad de los modelos. Finalmente, se han resumido los diferentes
+trabajos que resuelven cada una de las subtareas identificadas
+utilizando aprendizaje profundo.\\
+
+Para el apartado práctico del trabajo, se ha estudiado la eficacia del
+uso de características espacio-temporales extraídas con modelos de
+aprendizaje profundo para la detección de anomalías en
+vídeo. Concretamente, se ha experimentado sobre un modelo de detección
+de anomalías en multitudes que empleaba un extractor de
+características basado exclusivamente en redes neuronales
+convolucionales en tres dimensiones. Para dicho modelo, se ha
+sustituido el extractor de características por un compuesto de capas
+convolucionales y recurrentes. Nuestra hipótesis de partida defendía
+que las redes neuronales recurrentes iban a ser mejores extractores de
+características temporales que las redes convolucionales 3D.\\
+
+A raíz de los resultados extraídos de la experimentación, hemos podido
+comprobar que en efecto el modelo combinado convolucional-recurrente
+tiene un mejor comportamiento que el modelo puramente convolucional
+para el análisis de secuencias de vídeo.\\
+
+Por un lado, trabajando con el conjunto de datos UCF-101, hemos
+preentrenado el extractor de características que hemos utilizado
+después en el experimento principal. Durante esta fase de
+entrenamiento previa, hemos obtenido un modelo con una mejor capacidad
+de clasificación que el modelo basado en C3D (el extractor del trabajo
+original), con una mejora de más de 15 puntos porcentuales en la
+clasificación Top-1. Esta mejora se ha producido para todos los
+extractores de características propuestos, independientemente de la
+dimensión de la representación obtenida, lo cual pone de manifiesto
+que nos encontramos ante un extractor de mayor potencia.\\
+
+Por otro lado, en el experimento final, que involucraba la detección
+de fotogramas anómalos dentro del conjunto de datos UCF-Crime, hemos
+observado cómo el uso del extractor de características con capas
+recurrentes obtiene unos resultados mejores que el sistema
+original. Nuestros modelos superaban a los dos modelos originales,
+tanto el preentrenado por los autores como la réplica entrenada por
+nosotros, en todas las métricas que hemos calculado. Podemos remarcar
+especialmente la mejora en la métrica AUC que hemos conseguido con el
+modelo de dimensión 768, ya que esta era la única métrica que se
+utilizaba en el artículo original para la comparación de modelos.
+Hemos conseguido una arquitectura que mejora a la propuesta inicial,
+por lo que consideramos que los experimentos propuestos han sido
+exitosos. Además, dado que en primera instancia consideramos que
+utilizar sólo esta métrica podía dar lugar a una comparación pobre,
+hemos utilizado otras métricas que dan información sobre el
+comportamiento del modelo en la clase positiva, obteniendo también
+resultados que superan a la experimentación original.\\
+
+Otra mejora importante que hemos detectado es la capacidad de
+predicción de nuestros modelos a nivel de vídeo, en lugar de a nivel
+de fotograma. Aunque los resultados obtenidos por nuestros modelos no
+suponen una mejora tan representativa a la hora de localizar las
+anomalías dentro de los vídeos, sí que suponen un avance importante a
+la hora de detectar qué vídeos presentan anomalía. Concretamente,
+nuestro mejor modelo consigue una mejora de más de 10 puntos
+porcentuales sobre el modelo original en este contexto, lo cual es un
+aumento muy significativo.\\
+
+Es importante destacar también que esta mejora en los resultados se ha
+producido a pesar de que nuestros extractores de características están
+entrenados, a priori, en un conjunto de datos de menor calidad que el
+extractor de características original. Mientras que el modelo
+convolucional 3D estaba entrenado en un conjunto de datos de más de
+1000000 de vídeos y cerca de 500 clases, el nuestro está entrenado en
+un conjunto mucho más pequeño, de unos 10000 vídeos y 101 clases. Esta
+diferencia hace que el modelo original parta, presumiblemente, de una
+posición ventajosa respecto al nuestro, lo que hace que esta mejora
+resulte especialmente relevante.\\
+
+Finalmente, a pesar de que los resultados obtenidos son mejores que
+los de la experimentación original, se puede observar que aún hay un
+amplio margen de mejora en este conjunto de datos. El número de falsos
+negativos es aún muy elevado, clasificándose correctamente menos del
+50 \% de los fotogramas positivos. Es posible que esta problemática
+venga justificada, en parte, por el tipo de etiquetado del
+conjunto. Al tener que entrenar sin la localización exacta de las
+anomalías, resulta complicado enseñar al modelo a localizar de forma
+precisa la anomalía en el vídeo anómalo completo. Esto implica que,
+probablemente, se estén cometiendo errores en los primeros y últimos
+fotogramas alrededor de las anomalías. Además, hemos visto que en un
+cuarto de los vídeos etiquetados como anómalos no generamos ninguna
+etiqueta positiva, es decir, ignoramos casi el 25 \% de las anomalías
+presentes en el conjunto. Estamos hablando de un número muy importante
+de errores, que requerirán de modelos más potentes para ser detectados.\\
+
+A raíz de las conclusiones obtenidas del estudio, exponemos a
+continuación posibles vías de trabajo futuro.
+
+\section{Trabajo futuro}
+
+Dados los problemas que hemos encontrado durante el desarrollo del
+trabajo, especialmente en el apartado práctico del mismo, aparecen las
+siguientes líneas de trabajo a investigar:
+
+\begin{itemize}
+\item Utilizar una base de datos de entrenamiento para el extractor de
+  características de mayor tamaño: Por falta de capacidad de cómputo,
+  no se han utilizado bases de datos de mayor tamaño para el
+  entrenamiento del modelo que se usa posteriormente para la
+  extracción de características. Probablemente, el uso de bases de
+  datos con mayor diversidad producirá unos resultados mejores. El
+  modelo original, como ya dijimos, está entrenado sobre Sports-1M, de
+  tamaño significativamente mayor al empleado por nosotros. Existen
+  conjuntos para clasificación de vídeos de mayor tamaño, como el
+  conjunto YouTube-8M \cite{abu2016youtube}. Puede ser interesante
+  estudiar cómo el uso de un conjunto de datos u otro influye a la
+  hora de entrenar el extractor de características. Teniendo en cuenta
+  que los resultados obtenidos por nuestros modelos tras entrenar en
+  el conjunto pequeño son comparables con los resultados originales, y
+  mejores para la mayoría de las métricas calculadas, la mejora
+  supuesta por un mejor preentrenamiento podría demostrar por completo
+  que nos encontramos ante un modelo más potente.
+\item Afinar la arquitectura del modelo propuesto: En nuestra
+  experimentación hemos propuesto un modelo basado en convoluciones 2D
+  para extraer información de los fotogramas junto con una LSTM para
+  extraer información temporal. En nuestra experimentación hemos
+  estudiado el uso de tres representaciones de distintos tamaños, 512,
+  768 y 1024 elementos. No obstante, no se han explorado
+  representaciones mayores, ya que los resultados obtenidos mejoraban
+  la experimentación original y estamos ante modelos costosos, que
+  requieren de muchas horas de cómputo para ser entrenados. Además, se
+  ha utilizado Xception como red neuronal convolucional debido a su
+  buen funcionamiento y pequeño tamaño, pero podríamos haber optado
+  por otras arquitecturas disponibles. Es posible que las decisiones
+  tomadas en el diseño hayan provocado que no nos encontremos ante el
+  mejor modelo posible de este tipo y quede aún margen de mejora.
+\item Explorar nuevas arquitecturas para el extractor de
+  características: Existen modelos llamados redes LSTM convolucionales
+  \cite{xingjian2015convolutional} que sustituyen los productos
+  internos de las LSTM clásicas por operaciones de convolución, por lo
+  que son capaces de trabajar directamente con vídeos como dato de
+  entrada. En este caso, no necesitaríamos una primera etapa de la red
+  basada en una arquitectura convolucional, y podríamos aplicar
+  directamente esta arquitectura. No obstante, tras primeras pruebas
+  con este modelo, decidimos descartarlo por obtener malos resultados
+  al ser entrenado completamente desde cero. Uniendo esta arquitectura
+  al uso de conjuntos de datos de mayor tamaño podrían mejorarse los
+  resultados obtenidos.
+\item Modificar la política de entrenamiento del modelo: En nuestra
+  experimentación hemos construido un modelo con una arquitectura
+  similar al original, en el que hemos sustituido el extractor de
+  características por uno que creíamos de mayor potencia. No obstante,
+  el resto del modelo se ha mantenido más o menos igual que el de
+  partida para no influir de otra forma en el modelo. Debido a que el
+  margen de mejora actual en el conjunto de datos es bastante grande,
+  usar una política de entrenamiento distinta a la actual podría
+  suponer una mejora en los resultados obtenidos, así que puede ser
+  interesante explorar esta vía.
+\item Proponer modelos combinados: Los modelos que hemos utilizado en
+  esta experimentación han sido estudiados de forma independiente, ya
+  que nuestra intención era comprobar si las características
+  espacio-temporales eran más potentes que las convolucionales puras
+  para este problema. No hemos buscado, por tanto, obtener los mejores
+  resultados posibles en el conjunto de datos. Durante la
+  experimentación hemos observado cómo el modelo original y el modelo
+  propuesto tienen características diferentes, y un buen
+  comportamiento en distintos puntos (por ejemplo, para fotogramas
+  fácilmente clasificables, el modelo original funciona ligeramente
+  mejor que el nuestro). La utilización de los dos enfoques en un
+  modelo combinado probablemente obtenga mejores resultados que los
+  dos modelos por separado.
+\end{itemize}
+
+\section{Publicaciones asociadas}
+
+Debido a los resultados obtenidos en el desarrollo del trabajo, tanto
+a nivel teórico como práctico, se han propuesto dos publicaciones
+relacionadas con el mismo. Dichas publicaciones son las siguientes:
+
+\begin{itemize}
+\item Luque-Sánchez, F., Hupont, I., Tabik, S., \& Herrera,
+  F. (2020). \textbf{Revisiting crowd behaviour analysis through deep
+  learning: Taxonomy, anomaly detection, crowd emotions, datasets,
+  opportunities and prospects}. \textit{Information Fusion}. Esta
+  publicación consiste en una revisión sobre el estado del arte en
+  técnicas de análisis de multitudes en videovigilancia utilizando
+  aprendizaje profundo. En dicho artículo se establece la taxonomía
+  que se describe en el apartado teórico del trabajo, se revisan los
+  principales trabajos que resuelven este problema utilizando
+  aprendizaje profundo, y se pone de manifiesto la necesidad de
+  introducir características basadas en emociones para el análisis de
+  multitudes.
+\item Luque-Sánchez, F., Hupont, I., Tabik, S., \& Herrera,
+  F. (2020). \textbf{Xception-LSTM: Deep Spatio-temporal features for
+    crowd anomaly detection}. En preparación. Esta publicación
+  extiende la experimentación de llevada a cabo en el trabajo a partir
+  de las propuestas de trabajo futuro, para estudiar en profundidad
+  los modelos espacio-temporales para la detección de anomalías. Se
+  proponen nuevas arquitecturas basadas en capas CNN-LSTM combinadas,
+  y se preentrenan los extractores de características en conjuntos
+  de datos de mayor tamaño.
+\end{itemize}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

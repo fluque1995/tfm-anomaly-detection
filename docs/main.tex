@@ -1,0 +1,132 @@
+\documentclass[a4paper,11pt,oneside]{memoir}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{kpfonts}
+\usepackage{amsmath}
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{bibliography/bibliography.bib}
+
+\usepackage{variables}
+
+\usepackage{chapterheader}
+
+\usepackage{subfiles}
+
+\usepackage{subcaption}
+
+\decimalpoint
+
+\usepackage{dcolumn}
+\newcolumntype{.}{D{.}{\esperiod}{-1}} \makeatletter
+\addto\shorthandsspanish{\let\esperiod\es@period@code} \makeatother
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\RequirePackage{verbatim}
+% \RequirePackage[Glenn]{fncychap}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{afterpage}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{matrix,chains,positioning,
+  decorations.pathreplacing,arrows,babel,fit,
+  arrows.meta,shapes}
+\usepackage{pgfplots}
+\def\layersep{2.2cm}
+\newcommand{\empt}[2]{$#1^{\langle #2 \rangle}$}
+
+\newtheorem{theorem}{Teorema}
+\usepackage{longtable}
+\usepackage{xcolor}
+
+\usepackage[pdfborder={000}]{hyperref} %referencia
+
+% TABLES
+\usepackage{booktabs}
+\usepackage{ctable}
+\usepackage{multirow}
+\usepackage{makecell}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+
+\hypersetup{
+  pdfauthor = {\AuthorName (fluque1995@correo.ugr.es)},
+  pdftitle = {\ProjectTitle},
+  pdfsubject = {},
+  pdfkeywords = {palabra_clave1, palabra_clave2, palabra_clave3, ...},
+  pdfproducer = {pdflatex},
+  colorlinks = True,
+  linkcolor = darkgray,
+  citecolor = blue
+}
+
+% \hyphenation{}
+
+% \usepackage{doxygen/doxygen} \usepackage{pdfpages}
+\usepackage{url}
+\usepackage{colortbl,longtable}
+% \usepackage[stable]{Footmisc}
+% \usepackage{index}
+
+% \makeindex \usepackage[style=long,
+% cols=2,border=plain,toc=true,number=none]{glossary} \makeglossary
+
+% Definición de comandos que me son tiles:
+% \renewcommand{\indexname}{Índice alfabético}
+% \renewcommand{\glossaryname}{Glosario}
+
+\pagestyle{fancy} \fancyhf{} \fancyhead[LO]{\leftmark}
+\fancyhead[RE]{\rightmark} \fancyhead[RO,LE]{\textbf{\thepage}}
+\renewcommand{\chaptermark}[1]{\markboth{\textbf{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}
+
+\setlength{\headheight}{1.5\headheight}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\bigrule}{\titlerule[0.5mm]}
+
+% Para conseguir que en las páginas en blanco no ponga cabecerass
+\makeatletter
+\def\clearpage{%
+  \ifvmode \ifnum \@dbltopnum =\m@ne \ifdim \pagetotal <\topskip
+  \hbox{} \fi \fi \fi
+  \newpage
+  \thispagestyle{empty} \write\m@ne{} \vbox{} \penalty -\@Mi }
+\makeatother
+
+\begin{document}
+
+\subfile{prefaces/cover}
+
+\subfile{prefaces/spanish_abstract}
+
+\subfile{prefaces/english_abstract}
+
+\subfile{prefaces/licensing}
+
+\tableofcontents
+
+\subfile{chapters/01_introduction}
+
+\subfile{chapters/02_taxonomy}
+
+\subfile{chapters/03_problem_description}
+
+\subfile{chapters/04_experimentation}
+
+\subfile{chapters/05_conclusions}
+
+\nocite{*}
+\printbibliography
+
+\appendix
+
+%\subfile{appendices/ECG_explanation}
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[../main.tex]{memoir}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+  {\large\bfseries \ProjectTitleEng}\\
+\end{center}
+
+\begin{center}
+  \AuthorName\\
+  \vspace{0.7cm}
+  \noindent{\textbf{Keywords}:}\\
+  Deep learning, crowd analysis, anomaly detection, video-surveillance\\
+  \vspace{0.7cm}
+  \noindent{\textbf{Abstract}}\\
+\end{center}
+
+Last decades have experimented and unprecedented growth in population
+all around the globe. Crime and terrorism rates are also increasing
+rapidly. This two issues have converted video-surveillance into a
+fundamental tool worldwide. The number of security cameras installed
+both at public and private environments is huge nowadays, and thus
+processing the information retrieved by those cameras is getting
+harder everyday. Then, there is a need of automation of that process,
+using intelligent models capable of extracting information from video
+sources.\\
+
+Advances in deep learning produced in the last years have improved the
+results obtained in this research area by a large margin. Current
+models are able to extract complex information automatically, and to
+work in more difficult environments, specially in terms of density of
+individuals. Despite this recent advances, the area is still
+relatively modern, and consequently is not properly structured. Due to
+this fact, comparing works that tackle different sub-tasks within this
+area is usually difficult.\\
+
+In the previous context, this work tries to solve different tasks
+related to the automatic treatment of video-surveillance sources. In
+particular, we will focus our efforts in the analysis of crowd
+behaviors from video-surveillance sources. The work is divided in two
+parts. In the first part, which is the theoretical study, a sequential
+taxonomy is proposed. This taxonomy following a sequence allows to
+organize the different sub-tasks inside the topic as stages of a
+pipeline. The results of the latter stages of the pipeline strongly
+rely on the previous ones, and thus its results are heavily influenced
+by the first models.\\
+
+Apart from the proposed taxonomy, an in-depth review of the
+state-of-the-art is conducted. Particularly, we center our study in
+the works that use deep learning models to solve the crowd anomaly
+detection problem. Inside this topic, we analyze the main public
+datasets and proposals, organizing them depending on the specific type
+of anomaly to be detected.\\
+
+Finally, in the experimental part of this work, the use of
+spatio-temporal features for action anomaly detection is studied. To
+this end, one of the retrieved works is deeply analyzed and set as
+baseline for comparison. After the complete study, a new model for
+action anomaly detection is proposed. In particular, the original
+model employs a 3D convolutional feature extractor, which processes
+batches of consecutive frames. In our approach, the feature extractor
+proposed is a combination of 2D CNNs for spatial feature extraction,
+processing frames independently, together with a recurrent neural
+network, which learns to process the sequence of features from
+consecutive frames in the video. Our hypothesis defends that the
+combination of convolutions and recurrent networks better preserves
+the semantic structure of information in the video, and thus the
+obtained model extracts more meaningful information.\\
+
+Our experimentation suggests that our model outperforms the
+classification capability of the original model, despite being
+pretrained on a much smaller dataset. In particular, the original
+feature extractor is trained on a set 1000 times bigger than ours.
+This fact allows us to conclude that our proposal is better than
+the original one in terms of classification capability, validating
+our hypothesis.\\
+
+The code developed for experimentation, together with the instructions
+to replicate the experiments, can be found in the repository
+\url{https://github.com/fluque1995/tfm-anomaly-detection}.
+
+\newpage
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

@@ -1,0 +1,89 @@
+\documentclass[../main.tex]{memoir}
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+  {\large\bfseries \ProjectTitle}\\
+\end{center}
+
+\begin{center}
+  \AuthorName\\
+  \vspace{0.7cm}
+  \noindent{\textbf{Palabras clave}:}\\
+  Aprendizaje profundo, análisis de multitudes, detección de
+  anomalías, videovigilancia\\
+  \vspace{0.7cm}
+  \noindent{\textbf{Resumen}}\\
+
+\end{center}
+
+En las últimas décadas se ha producido un crecimiento poblacional sin
+precedentes en todas las partes del mundo, y las tasas de criminalidad
+y terrorismo se han disparado en muchos territorios. Esto ha provocado
+que la videovigilancia se convierta en una herramienta prioritaria a
+nivel mundial. El número de cámaras de seguridad instaladas tanto en
+ámbito público como privado ha crecido significativamente, y con ello
+la dificultad de gestionar la información recogida por las mismas de
+forma manual. Aparece, por tanto, la necesidad de automatizar este
+proceso, utilizando para ello modelos inteligentes capaces de extraer
+información de las secuencias de vídeo recogidas por las cámaras.\\
+
+Los avances en aprendizaje profundo de los últimos años han permitido
+que los resultados obtenidos sobre esta área de investigación mejoren
+considerablemente. Los modelos actuales son capaces de extraer
+información más compleja, y trabajar en entornos de mayor dificultad,
+especialmente en cuanto a densidad de individuos se refiere. A pesar
+de ello, el estudio de esta tarea es relativamente reciente, por lo
+que no está correctamente estructurada, y resulta difícil comparar los
+trabajos propuestos.\\
+
+Dado el contexto anterior, este trabajo trata de resolver varias
+tareas relacionadas con el tratamiento automático de fuentes de
+videovigilancia, en particular con el análisis de comportamientos de
+multitudes. Por un lado, se realiza un estudio teórico de la temática,
+con una propuesta taxonómica que permite agrupar los distintos
+trabajos siguiendo una secuencia de tareas. Esta organización sitúa
+las distintas subtareas consideradas dentro de la temática en
+distintos pasos de la secuencia, de forma que los resultados de los
+pasos posteriores se ven fuertemente influenciados por los obtenidos
+en los pasos previos.\\
+
+Además de la propuesta taxonómica, en el estudio teórico se hace una
+revisión exhaustiva de la literatura que utiliza modelos de
+aprendizaje profundo para resolver el problema de la detección de
+anomalías en multitudes. Para esta subtarea, se analizan los
+principales conjuntos de datos disponibles públicamente, y se estudian
+los trabajos del estado del arte, agrupando los mismos por el tipo
+concreto de anomalía que tratan de identificar.\\
+
+En el apartado práctico del trabajo, se estudia el uso de
+características espacio-temporales para la detección de acciones
+anómalas en vídeo. Para llevar a cabo dicho estudio, se establece como
+punto de partida un modelo de detección de anomalías basado en un
+extractor de características convolucional en tres
+dimensiones. Nuestra propuesta, en lugar de utilizar un extractor
+exclusivamente convolucional, aprovecha la potencia de las redes
+neuronales convolucionales 2D para el análisis de los fotogramas por
+separado, extrayendo información espacial, y la capacidad de las redes
+neuronales recurrentes para extraer información temporal de la
+secuencia de características de los fotogramas consecutivos. Dicho
+extractor de características es más complejo que la propuesta
+original, y conserva mejor la estructura temporal del vídeo, lo cual
+permite la extracción de información de mayor calidad. El código
+desarrollado para el experimentación se encuentra disponible en el
+repositorio \url{https://github.com/fluque1995/tfm-anomaly-detection}.\\
+
+Los resultados obtenidos del estudio sugieren que nuestro modelo tiene
+mejor capacidad de clasificación que el modelo original, incluso a
+pesar de estar entrenado en un conjunto de datos de tamaño 1000 veces
+menor que el extractor de características de partida. Este hecho
+nos permite concluir que nuestra propuesta es de mayor calidad que el
+modelo de partida, validando nuestra hipótesis inicial.
+
+\newpage
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
