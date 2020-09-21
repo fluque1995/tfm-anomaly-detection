@@ -4,6 +4,15 @@ Master's thesis in Data Sciences: Study on the use of Deep Learning
 for Crowd Behavior Analysis from videosurveillance
 sources.
 
+## Documents
+
+Main report (in spanish) can be donwloaded from
+[here](https://github.com/fluque1995/tfm-anomaly-detection/blob/master/docs/memoria_TFM_Luque_Sanchez_Francisco.pdf).
+
+Slides used in the public defense (also in spanish) can be downloaded
+from
+[here](https://github.com/fluque1995/tfm-anomaly-detection/blob/master/docs/slides/slides.pdf).
+
 ## Theoretical study
 
 Theoretical study consists of a proposal of taxonomy for crowd
