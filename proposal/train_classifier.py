@@ -1,10 +1,11 @@
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.regularizers import l2
-from keras.optimizers import Adagrad
+from keras.optimizers import Adagrad, Adam
 from scipy.io import savemat
 from keras.models import model_from_json
 import os
+import configuration as cfg
 
 from os import listdir
 import numpy as np
@@ -105,11 +106,13 @@ def custom_objective(y_true, y_pred):
     z_scores = K.stack(z_scores_list)
     z = K.mean(z_scores)
 
-    return z + 0.00008*K.sum(temporal_constrains) + 0.00008*K.sum(sparsity_constrains)
+    return z + \
+        0.00004*K.sum(temporal_constrains) + \
+        0.00004*K.sum(sparsity_constrains)
 
 output_dir = "trained_models/"
-normal_dir = "../processed_lstm_features/train/normal"
-abnormal_dir = "../processed_lstm_features/train/abnormal"
+normal_dir = cfg.processed_normal_train_features
+abnormal_dir = cfg.processed_abnormal_train_features
 
 normal_list = os.listdir(normal_dir)
 normal_list.sort()
@@ -123,7 +126,7 @@ model_path = output_dir + 'model_proposal.json'
 #Create Full connected Model
 model = classifier.classifier_model()
 
-adagrad=Adagrad(lr=0.01, epsilon=1e-08)
+adagrad=Adagrad(lr=0.002, epsilon=1e-07)
 model.compile(loss=custom_objective, optimizer=adagrad)
 
 if not os.path.exists(output_dir):

@@ -1,13 +1,14 @@
 import os
 
-c3d_model_weights = './trained_models/c3d_sports1m.h5'
+extractor_model_weights = "./trained_models/rec_feats_weights.h5"
+
 classifier_model_weigts = './trained_models/weights_proposal.mat'
 classifier_model_json = './trained_models/model_proposal.json'
 
 input_folder  = './input'
 output_folder = '/mnt/sdd/pacoluque/output'
 
-sample_video_path = '../dataset/train/abnormal/Arrest018_x264.mp4'
+sample_video_path = '../dataset/train/abnormal/RoadAccidents021_x264.mp4'
 
 raw_dataset_folder = '../dataset/'
 raw_features_folder = "../raw_lstm_features"

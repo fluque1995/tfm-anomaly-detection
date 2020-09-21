@@ -6,7 +6,7 @@ import configuration as cfg
 import numpy as np
 import sklearn.preprocessing
 
-original_model = keras.models.load_model("trained_models/rec_feats_weights.200.h5")
+original_model = keras.models.load_model(cfg.extractor_model_weights)
 spatiotemporal_extractor = keras.models.Model(
     inputs = original_model.input,
     outputs = original_model.get_layer("lstm_1").output
